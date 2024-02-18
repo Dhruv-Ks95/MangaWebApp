@@ -9,6 +9,13 @@
 <body>
     <h1>This is a beginning of something beautiful, maybe </h1>
 
+    <%  if(locals.dname && locals.durl){  %>
+        <h2>Drink Name : <%= dname %> </h2>
+        <img src="<%=durl%>" alt="Imageofthatdrink" width="200px" height="200px">
+    <%  }else{ %>
+        <p>something will appear here </p>
+    <%  } %>
+
     <a href="aboutus.ejs">click me!</a>
 
     <script src="scriptz/effects.js"></script>
