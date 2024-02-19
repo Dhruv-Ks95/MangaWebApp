@@ -6,17 +6,46 @@ const port = 4150;
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-// Random API until i get access to MangaDex API
-const API_URL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=12322";
+// Kitsu API for anime descriptions and details
+const API_URL = "https://kitsu.io/api/edge"
+const config = {
+    headers: { Authorization: `Bearer feEv2WXYBh2npfoM_ZiMafpP-iBpDQiiU6njT1NZ7-g` }
+};
 
 app.get("/", async(req,res)=>{
     try{
-        const response = await axios.get(API_URL);
-        console.log(response.data.drinks);
-        const drinkname = response.data.drinks[0].strDrink;
-        const drinkurl = response.data.drinks[0].strDrinkThumb;
-        console.log(drinkname,drinkurl);
-        res.render("index.ejs", {dname:drinkname,durl:drinkurl});
+        const trendinganimeurl = API_URL +"/trending/anime";
+        const response = await axios.get(trendinganimeurl,config);
+        const rs = response.data.data;
+        const tofetch = 10;
+        const trendingAnimes = [];
+        for(let i = 0;i<tofetch;i++){
+            const title = rs[i].attributes.titles.en;
+            const synopsis = rs[i].attributes.synopsis;
+            const description = rs[i].attributes.description;
+            const averageRating = rs[i].attributes.averageRating;
+            const favouritesCount = rs[i].attributes.favoritesCount;
+            const ageRating = rs[i].attributes.ageRating;
+            const episodeCount = rs[i].attributes.episodeCount;
+            const imageurl = rs[i].attributes.posterImage.medium;
+            const coverurl = rs[i].attributes.coverImage.small;
+
+            const series = {
+                title,
+                synopsis,
+                description,
+                averageRating,
+                favouritesCount,
+                ageRating,
+                episodeCount,
+                imageurl,
+                coverurl,
+            };
+
+            trendingAnimes.push(series);
+        }
+        
+        res.render("index.ejs",{trending : trendingAnimes});
     }catch(error){
         console.log("some error in fetching from API");
         res.sendStatus(500);

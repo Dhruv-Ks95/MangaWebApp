@@ -1,3 +1,59 @@
-body{
-    background-color: aqua;
+*{
+    font-family: "Fredoka", sans-serif;
 }
+
+body{
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+}
+a:hover{
+    color: #24e4f4;
+}
+
+
+/* NAVBARS */
+.navbar{
+    background-color: #0c0c0c;
+    z-index: 5;
+}
+.navbar-brand{
+    color: #fff;
+}
+.navbar-brand:hover{
+    color: #24e4f4;
+}
+
+.nav-link{
+    color: #fff;
+}
+.nav-link:hover{
+    color: #24e4f4;
+}
+.nav-link:active{
+    color: #fff;
+}
+.nav-link[tabindex]:focus{
+    color: #24e4f4;
+}
+
+/* BANNER */
+.banner{
+    height: 40rem;
+    padding: 2%;
+    background-color: #1c1c1c;
+}
+  
+  
+
+/* color pallets : 
+cyan - #24e4f4
+blue - #7c64fc
+gray - #e4e6e6
+lightblack - #1c1c1c
+darkblack - #0c0c0c
+*/
