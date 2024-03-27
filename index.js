@@ -19,6 +19,7 @@ app.get("/", async(req,res)=>{
         const rs = response.data.data;
         const tofetch = 10;
         const trendingAnimes = [];
+        // Planning to update the front-end 
         for(let i = 0;i<tofetch;i++){
             const title = rs[i].attributes.titles.en;
             const synopsis = rs[i].attributes.synopsis;
