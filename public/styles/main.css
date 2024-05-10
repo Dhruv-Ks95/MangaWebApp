@@ -7,7 +7,7 @@ body{
     color: #fff;
 }
 
-a{
+li,a, .navbar, .navbar-brand, .nav-link{
     color: #fff;
     text-decoration: none;
 }
@@ -18,26 +18,14 @@ a:hover{
 
 /* NAVBARS */
 .navbar{
-    background-color: #0c0c0c;
     z-index: 5;
 }
-.navbar-brand{
-    color: #fff;
-}
+
 .navbar-brand:hover{
     color: #24e4f4;
 }
 
-.nav-link{
-    color: #fff;
-}
 .nav-link:hover{
-    color: #24e4f4;
-}
-.nav-link:active{
-    color: #fff;
-}
-.nav-link[tabindex]:focus{
     color: #24e4f4;
 }
 
@@ -48,7 +36,17 @@ a:hover{
     background-color: #1c1c1c;
 }
   
-  
+.banner p{
+    font-size: 3rem;
+    padding: 1%;
+    text-align: center;
+    margin: auto;
+}
+
+.bannerdiv{
+    background : linear-gradient(45deg, black, gray);
+    border-radius: 25px;
+}
 
 /* color pallets : 
 cyan - #24e4f4

@@ -9,7 +9,7 @@ app.use(express.static("public"));
 // Kitsu API for anime descriptions and details
 const API_URL = "https://kitsu.io/api/edge"
 const config = {
-    headers: { Authorization: `Bearer feEv2WXYBh2npfoM_ZiMafpP-iBpDQiiU6njT1NZ7-g` }
+    headers: { Authorization: `Bearer ROA8mdsn_UCKZnJ_d0tNcRs5hXOI2lFtrh2edpj2qDs` }
 };
 
 app.get("/", async(req,res)=>{
@@ -17,8 +17,8 @@ app.get("/", async(req,res)=>{
         const trendinganimeurl = API_URL +"/trending/anime";
         const response = await axios.get(trendinganimeurl,config);
         const rs = response.data.data;
-        const tofetch = 10;
         const trendingAnimes = [];
+        const tofetch = 10;
         // Planning to update the front-end 
         for(let i = 0;i<tofetch;i++){
             const title = rs[i].attributes.titles.en;
