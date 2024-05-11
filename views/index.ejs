@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,19 +19,23 @@
     <link rel="stylesheet" href="styles/main.css">
     <title>AniHunt 🗡</title>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg sticky-top bg-black">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">AniHunt</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+            <a class="navbar-brand" href="/">AniHunt</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navcollection ms-auto">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" tabindex="1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" tabindex="1" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Browse
                             </a>
                             <ul class="dropdown-menu">
@@ -42,56 +50,75 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home </a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
 
-      
+
     <section class="banner">
         <div class="row bannerdiv">
             <div class="col-6" style="align-self: center; padding: 0px;">
                 <p>Find your next anime obsession on AniHunt 🎯 </p>
             </div>
             <div class="col-6" style="padding:0px;">
-                <img src="images/coverimg.jpeg" alt="Coverimage" style="width: 100%; height:100%; margin: auto; display: block; border-radius: 25px;">
+                <img src="images/coverimg.jpeg" alt="Coverimage"
+                    style="width: 100%; height:100%; margin: auto; display: block; border-radius: 25px;">
             </div>
 
         </div>
 
     </section>
 
+    <section class="trendinganimes">
+        <div class="container-fluid">
+            <% if(locals.trending){ %>
+                <h1>Trending Animes : </h1>
+                <div class="row align-items-start">
+                    <%for(let i=0;i<trending.length;i++){ %>
 
-    <div class="container-fluid">
-        <%  if(locals.trending){  %>
-            <h1>Trending Animes : </h1>
-            <div class="row align-items-start">
-                <%for(let i=0;i<trending.length;i++){ %>
+                        <div class="cardcontainer">
 
-                    <div class="card col-3" style="width: 18rem;">
-                        <img src="<%=trending[i].imageurl%>" class="card-img-top" alt="animePic">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= trending[i].title %></h5>
-                            <p class="card-text">
-                                <%= trending[i].synopsis %>
-                            </p>
-                            <a href="/" class="btn btn-primary">Get More Details</a>
+                            <div class="thecard col-3">
+                                <div class="thefront">
+                                    <img src="<%=trending[i].imageurl%>" class="cardimg" alt="animePic">
+                                    <div class="overlay">
+                                        <h5>
+                                            <%= trending[i].title %>
+                                        </h5>
+                                        <button class="readmore btn btn-primary">Read More</button>
+                                    </div>
+                                </div>
+                                <div class="theback" style="background: url('<%=trending[i].imageurl%>'); background-size: cover; ">
+                                    <div class="glass" >
+                                        <p>
+                                            <%= trending[i].synopsis %>
+                                        </p>
+                                        <button class="goback btn btn-primary"> Go back </button>
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
-                    </div>
-                <% } %>
-            </div>
+                        <% } %>
+                </div>
 
-        <%  }else{ %>
-            <p>something will appear here soon</p>
-        <%  } %>
-    </div>
+                <% }else{ %>
+                    <p>something will appear here soon</p>
+                    <% } %>
+        </div>
 
+    </section>
 
     <!-- ZAVASCRIPTZ -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script src="scriptz/effects.js"></script>
 </body>
+
 </html>
