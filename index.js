@@ -45,8 +45,51 @@ app.get("/", async(req,res)=>{
 
             trendingAnimes.push(series);
         }
+        const trendingmangaurl = API_URL + "/trending/manga";
+
+        const responseman = await axios.get(trendingmangaurl,config);
+        const rsman = responseman.data.data;
+        const trendingManga = [];
+        for(let i = 0;i<10;i++){
+            const title = rsman[i]?.attributes?.titles?.en ?? rsman[i]?.attributes?.titles?.en_us ?? "Title Not Available";
+            const synopsis = rsman[i].attributes.synopsis;
+            const description = rsman[i].attributes.description;
+            const averageRating = rsman[i].attributes.averageRating;
+            const favouritesCount = rsman[i].attributes.favoritesCount;
+            const ageRating = rsman[i].attributes.ageRating;
+            const episodeCount = rsman[i].attributes.chapterCount;
+            const imageurl = rsman[i].attributes.posterImage.medium;
+
+            const series = {
+                title,
+                synopsis,
+                description,
+                averageRating,
+                favouritesCount,
+                ageRating,
+                episodeCount,
+                imageurl,
+            };
+            trendingManga.push(series);
+        }
+        const charactersurl = API_URL + "/characters";
+        const responsechar = await axios.get(charactersurl,config);
+        const rschar = responsechar.data.data;
+        const characters = [];
+        for(let i=0;i<tofetch;i++){
+            const title = rschar[i].attributes.names.en;
+            const synopsis = rschar[i].attributes.description;
+            const imageurl = rschar[i].attributes.image.original;
+
+            const series = {
+                title,
+                synopsis,
+                imageurl
+            }
+            characters.push(series);
+        }
         
-        res.render("index.ejs",{trending : trendingAnimes});
+        res.render("index.ejs",{trendingani : trendingAnimes, trendingman : trendingManga, chars:characters});
     }catch(error){
         console.log("some error in fetching from API");
         res.sendStatus(500);
